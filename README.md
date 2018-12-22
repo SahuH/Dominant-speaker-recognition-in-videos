@@ -1,4 +1,4 @@
-# dominant-speaker-recognition-in-videos
+# Dominant-speaker-recognition-in-videos
 Frame-wise recognition of dominant speakers in videos
 # Introduction
 This is a frame-wise face regonition project in videos. I have created my own dataset.
@@ -23,3 +23,15 @@ Pre-trained inception net is used in keras. After removing last layer, two fully
 # Results
 Model is trained on the two datasets: super-cropped and moderate-cropped. We did this experiment as we wanted to assess the effect of introducing noise in the training data on the model accuracy. We has suspected that the supercrop model will likely overfit and do worse on the new frames which had different background noise than the training data. The results of our experiment is shown in the fig 4.1.1. We observed that the model performed better for the less cropped dataset with the highest accuracy of 52.5%. The highest accuracy observed for the more cropped dataset model was 46% approximately.
 
+## Gradient Ascent
+Based on our learnt weights, we tried to construct the image which will maximise the probability of getting a particular class given the trained model.
+
+## Visualizing Test Data
+To visualise the test data, we made use of the tSNE algorithm. For the two sets of test data, we first reduced the
+dimension of the data to 50 by doing a PCA(Principal Component Analysis). After this dimension reduction, we
+further reduced the dimension of the data by using the tSNE algorithm. The results obtained for the two datasets, the one
+given earlier on the one given out just the day before are shown in the Fig4.4.2. we observed clusters corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the
+class of noise were sparser than the other classes. The possible reason for observing different clusters for the same
+speaker, is that since different frames of a particular. speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, there are quite different from each
+other. The class of noise is sparser because very diverse frames have been classified with the same label in this
+class.

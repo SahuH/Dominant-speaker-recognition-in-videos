@@ -7,12 +7,21 @@ This is a frame-wise face regonition project in videos. I have created my own da
 I have selected a set of 6 diverse-appearing youtuberes, namely, Atul Khatri, Flute Raman, Sadhguru, Sandeep Maheswari, Saurabh Pant. After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
 Dominant speaker's faces are croppped from images using openCV’s haar cascade classifier. I've used cascade face detector to identify human faces in each of the frame from the video and then crop the identified region. Two types of cropping was applied which is explained in detail in later section.
 
-# Removing noisy images. 
-In order to remove noisy images (e.g. images showing audience) from training data, a condition is imposed to assign the label of a particular speaker to a frame only when the number of detected faces in the frame was exactly equal to one. This strategy seemed to work fine for the five classes other than the Sadhguru. Due to the presence of a long beard on Sadhguru’s face the cascade face detector was not able to identify the facial features and therefore didn’t identify it as a human face. Hence, for the videos of Sadguru, Cascade eye detector is used to filter relevant frames as shown in the fig 2.1.3. We gave the label of Sadguru to a particular frame only when the number of detected eyes in a frame was exactly equal to two. The noisy images are introduced as a separate seventh class in training data.
+## Removing noisy images. 
+In order to remove noisy images (e.g. images showing audience) from training data, a condition is imposed to assign the label of a particular speaker to a frame only when the number of detected faces in the frame was exactly equal to one. This strategy seemed to work fine for the five classes except Sadhguru. Due to the presence of a long beard on Sadhguru’s face, the cascade face detector was not able to identify the facial features and therefore didn’t identify it as a human face. Hence, for the videos of Sadguru, Cascade eye detector is used to filter relevant frames as shown in the fig 2.1.3. We gave the label of Sadguru to a particular frame only when the number of detected eyes in a frame was exactly equal to two. The noisy images are introduced as a separate seventh class in training data.
 
-## Other Heuristics
+In spite of using above mentioned methodology, some noisy images still appears in data. One can remove them manually.
 
-# Introducing background noise for generalization
+## Other Heuristics to remove noise
+There are other techniques which can be used to remove noisy frames. I mention some techniques here.
+
+### Alternate approach #1
+Measure the correlation between successive frames. You can achieve this by making use of [numpy correlation function](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.corrcoef.html). Then, plot correlation factor value with frames and remove the frames with low correlation factor value. The idea is that speaker and noise frames would have a very low correlation factor. 
+
+### Alternate approach #2
+For each of the speakers, keep a reference image during filtering. For each frame calculate its correlation with the reference image and the the previous frame. If the maximum of the two correlations is higher than a threshold than the frame get labelled as the particular speaker else noise. And, if a particular frame is identified as noise, don't use that to calculate the correlation with next frame. Basically, skip that frame and calculate the correlation of next frame with the reference image and the last identified speaker frame.
+
+## Introducing background noise for generalization
 In order to let model generalize well, a different type of cropping is also implemented in which some background behind the speaker is allowed in the images, I call this moderate-cropped. The model is trained on both the datasets, namely, super-cropped and moderate-cropped and finally the accuracies are compared between the two.
 
 # Preparing Test Data

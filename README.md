@@ -36,6 +36,8 @@ Pre-trained inception net is used in keras. After removing last layer, two fully
 # Results
 Model is trained on the two datasets: super-cropped and moderate-cropped. We did this experiment as we wanted to assess the effect of introducing noise in the training data on the model accuracy. We has suspected that the supercrop model will likely overfit and do worse on the new frames which had different background noise than the training data. The results of our experiment is shown in the fig 4.1.1. We observed that the model performed better for the less cropped dataset with the highest accuracy of 52.5%. The highest accuracy observed for the more cropped dataset model was 46% approximately.
 
+![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/results.jpg)
+
 ## Gradient Ascent
 Based on our learnt weights, we tried to construct the image which will maximise the probability of getting a particular class given the trained model.
 
@@ -48,3 +50,5 @@ class of noise were sparser than the other classes. The possible reason for obse
 speaker, is that since different frames of a particular. speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, there are quite different from each
 other. The class of noise is sparser because very diverse frames have been classified with the same label in this
 class.
+
+![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/test_data_visualization.jpg)

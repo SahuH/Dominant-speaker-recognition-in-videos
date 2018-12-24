@@ -10,6 +10,8 @@ Dominant speaker's faces are croppped from images using openCV’s haar cascade 
 ## Removing noisy images. 
 In order to remove noisy images (e.g. images showing audience) from training data, a condition is imposed to assign the label of a particular speaker to a frame only when the number of detected faces in the frame was exactly equal to one. This strategy seemed to work fine for the five classes except Sadhguru. Due to the presence of a long beard on Sadhguru’s face, the cascade face detector was not able to identify the facial features and therefore didn’t identify it as a human face. Hence, for the videos of Sadguru, Cascade eye detector is used to filter relevant frames as shown in the fig 2.1.3. We gave the label of Sadguru to a particular frame only when the number of detected eyes in a frame was exactly equal to two. The noisy images are introduced as a separate seventh class in training data.
 
+![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/sadhguru_eye_detector.jpg)
+
 In spite of using above mentioned methodology, some noisy images still appears in data. One can remove them manually.
 
 ## Other Heuristics to remove noise

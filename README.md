@@ -24,6 +24,8 @@ For each of the speakers, keep a reference image during filtering. For each fram
 ## Introducing background noise for generalization
 In order to let model generalize well, a different type of cropping is also implemented in which some background behind the speaker is allowed in the images, I call this moderate-cropped. The model is trained on both the datasets, namely, super-cropped and moderate-cropped and finally the accuracies are compared between the two.
 
+![Alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/super_moderate_cropped.jpg)
+
 # Preparing Test Data
 
 # Model Architecture

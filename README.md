@@ -1,10 +1,10 @@
 # Dominant-speaker-recognition-in-videos
 Frame-wise recognition of dominant speakers in videos
 # Introduction
-This is a frame-wise face regonition project in videos. I have created my own dataset.
+This is a frame-wise face regonition project in videos. I have created my own dataset through Youtube.
 
 # Preparing Training Data
-I have selected a set of 6 diverse-appearing youtuberes, namely, Atul Khatri, Flute Raman, Sadhguru, Sandeep Maheswari, Saurabh Pant. After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
+I have selected a set of 6 diverse-appearing youtuberes, namely, [Atul Khatri](https://www.youtube.com/user/gutterguppie), [Flute Raman](https://www.youtube.com/user/fluteraman), [Sadhguru](https://www.youtube.com/user/sadhguru), [Sandeep Maheswari](https://www.youtube.com/user/SandeepSeminars), [Saurabh Pant](https://www.youtube.com/user/PantOnFireComedy). After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
 Dominant speaker's faces are croppped from images using openCV’s haar cascade classifier. I've used cascade face detector to identify human faces in each of the frame from the video and then crop the identified region. Two types of cropping was applied which is explained in detail in later section.
 
 ## Removing noisy images. 

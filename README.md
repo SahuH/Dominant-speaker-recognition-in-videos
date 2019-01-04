@@ -34,7 +34,7 @@ In order to let model generalize well, a different type of cropping is also impl
 Pre-trained inception net is used in keras. After removing last layer, two fully connected layers are added, with the last one being a softmax layer. Output being a seven dimensional vector, corresponding to the seven classes as mentioned previously.
 
 # Results
-Model is trained on the two datasets: super-cropped and moderate-cropped. We did this experiment as we wanted to assess the effect of introducing noise in the training data on the model accuracy. We has suspected that the supercrop model will likely overfit and do worse on the new frames which had different background noise than the training data. The results of our experiment is shown in the fig 4.1.1. We observed that the model performed better for the less cropped dataset with the highest accuracy of 52.5%. The highest accuracy observed for the more cropped dataset model was 46% approximately.
+Model is trained on the two datasets: super-cropped and moderate-cropped, in order to assess the effect of introducing noise in the training data on the model accuracy. The supercrop model should overfit and do worse on the new frames which had different background noise than the training data. The results are consistent with intuitions with super-cropped model performing better achieving highest accuracy of **52.5%**. The highest accuracy observed for the super-cropped dataset model is 46% approximately.
 
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/results.jpg)
 

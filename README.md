@@ -45,6 +45,6 @@ To visualise the test data, I made use of the tSNE algorithm. The Dimensions of 
 
 
 ## Visualizing the Model
-I, here, make use of a technique called [Grad-CAM](https://arxiv.org/pdf/1610.02391.pdf). It allows to obtain a localization map for any target class, highlighting regions (in the form of heatmap) in input image that positively correlates with the chosen class. For this, I have chosen one image (which are not present in training data) for each class belonging to six speakers.
+I, here, make use of a technique called [Grad-CAM](https://arxiv.org/pdf/1610.02391.pdf). It allows to obtain a localization map for any target class, highlighting regions (in the form of heatmap) in input image that positively correlates with the chosen class. For this, I have selected one image (which are not present in training data) for each class belonging to six speakers.
 
-As you can see, in all the images either face or its near region is highlighted showing that our model is looking at right place to classify images and therefore has learnt well!
+As you can see, in all the images either face or its near region is highlighted showing that our model is looking at right place to classify images and therefore has **learnt well!**

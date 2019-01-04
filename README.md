@@ -38,8 +38,7 @@ Model is trained on the two datasets: super-cropped and moderate-cropped, in ord
 ## Visualizing Test Data
 To visualise the test data, I made use of the [tSNE](http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf) algorithm. The Dimensions of test data is first reduced to 50 by doing a PCA(Principal Component Analysis). Then, tSNE is used to reduce it further to 2 dimensions. Clusters can be observed corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the class of noise were sparser than the other classes. The possible reason for observing different clusters for the same speaker can be different frames of a particular speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, they are quite different from each other. The class of noise is sparser because very diverse frames have been classified with the same label in this class.
 
-![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/test_data_visualization.jpg)
-
+![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/visualization_test_data.jpg)
 
 ## Visualizing the Model
 I, here, make use of a technique called [Grad-CAM](https://arxiv.org/pdf/1610.02391.pdf). It allows to obtain a localization map for any target class, highlighting regions (in the form of heatmap) in input image that positively correlates with the chosen class. For this, I have selected one image (which are not present in training data) for each class belonging to six speakers.

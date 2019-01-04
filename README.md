@@ -1,14 +1,13 @@
 # Dominant-speaker-recognition-in-videos
 Frame-wise recognition of dominant speakers in videos
 # Introduction
-This is a frame-wise face regonition project in videos. I have created my own dataset through Youtube.
+This is a frame-wise face recognition project in videos. I have created my own dataset through Youtube.
 
 # Preparing Training Data
-I have selected a set of 6 diverse-appearing youtubers, namely, [Atul Khatri](https://www.youtube.com/user/gutterguppie), [Flute Raman](https://www.youtube.com/user/fluteraman), [Sadhguru](https://www.youtube.com/user/sadhguru), [Sandeep Maheswari](https://www.youtube.com/user/SandeepSeminars), [Saurabh Pant](https://www.youtube.com/user/PantOnFireComedy). After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
-Dominant speaker's faces are croppped from images using openCV’s haar cascade classifier. I've used cascade face detector to identify human faces in each of the frame from the video and then crop the identified region. Two types of cropping was applied which is explained in detail in later section.
+I have selected a set of 6 diverse-appearing youtubers, namely, [Atul Khatri](https://www.youtube.com/user/gutterguppie), [Flute Raman](https://www.youtube.com/user/fluteraman), [Sadhguru](https://www.youtube.com/user/sadhguru), [Shailendra Kumar](https://www.youtube.com/channel/UCc6tYtmPd-1aEtr5TCu3a8Q), [Sandeep Maheswari](https://www.youtube.com/user/SandeepSeminars) and [Saurabh Pant](https://www.youtube.com/user/PantOnFireComedy). After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data. Dominant speaker's faces are croppped from images using OpenCV’s [haar cascade](https://docs.opencv.org/3.3.1/d7/d8b/tutorial_py_face_detection.html) classifier. I've used cascade face detector to identify human faces in each of the frame from the video and then crop the identified region. Two types of cropping was applied which is explained in detail in later section.
 
 ## Removing noisy images. 
-In order to remove noisy images (e.g. images showing audience) from training data, a condition is imposed to assign the label of a particular speaker to a frame only when the number of detected faces in the frame was exactly equal to one. This strategy seemed to work fine for the five classes except Sadhguru. Due to the presence of a long beard on Sadhguru’s face, the cascade face detector was not able to identify the facial features and therefore didn’t identify it as a human face. Hence, for the videos of Sadguru, Cascade eye detector is used to filter relevant frames as shown in the fig 2.1.3. We gave the label of Sadguru to a particular frame only when the number of detected eyes in a frame was exactly equal to two. The noisy images are introduced as a separate seventh class in training data.
+In order to remove noisy images (e.g. images showing audience) from training data, a condition is imposed to assign the label of a particular speaker to a frame only when the number of detected faces in the frame was exactly equal to one. This strategy seemed to work fine for the five classes except Sadhguru. Due to the presence of a long beard on Sadhguru’s face, the cascade face detector was not able to identify the facial features and therefore didn’t identify it as a human face. Hence, for the videos of Sadguru, Cascade eye detector is used to filter relevant frames as shown in the figure below. Label of Sadguru was given to a particular frame only when the number of detected eyes in a frame was exactly equal to two. The noisy images are introduced as a separate seventh class in training data.
 
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/sadhguru_eye_detector.jpg)
 
@@ -28,8 +27,6 @@ In order to let model generalize well, a different type of cropping is also impl
 
 ![Alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/super_moderate_cropped.jpg)
 
-# Preparing Test Data
-
 # Model Architecture
 Pre-trained inception net is used in keras. After removing last layer, two fully connected layers are added, with the last one being a softmax layer. Output being a seven dimensional vector, corresponding to the seven classes as mentioned previously.
 
@@ -39,7 +36,7 @@ Model is trained on the two datasets: super-cropped and moderate-cropped, in ord
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/results.jpg)
 
 ## Visualizing Test Data
-To visualise the test data, I made use of the tSNE algorithm. The Dimensions of test data is first reduced to 50 by doing a PCA(Principal Component Analysis). Then, tSNE is used to reduce it further to 2 dimensions. Clusters can be observed corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the class of noise were sparser than the other classes. The possible reason for observing different clusters for the same speaker can be different frames of a particular speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, they are quite different from each other. The class of noise is sparser because very diverse frames have been classified with the same label in this class.
+To visualise the test data, I made use of the [tSNE](http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf) algorithm. The Dimensions of test data is first reduced to 50 by doing a PCA(Principal Component Analysis). Then, tSNE is used to reduce it further to 2 dimensions. Clusters can be observed corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the class of noise were sparser than the other classes. The possible reason for observing different clusters for the same speaker can be different frames of a particular speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, they are quite different from each other. The class of noise is sparser because very diverse frames have been classified with the same label in this class.
 
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/test_data_visualization.jpg)
 

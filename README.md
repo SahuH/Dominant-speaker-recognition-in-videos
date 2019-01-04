@@ -4,7 +4,7 @@ Frame-wise recognition of dominant speakers in videos
 This is a frame-wise face regonition project in videos. I have created my own dataset through Youtube.
 
 # Preparing Training Data
-I have selected a set of 6 diverse-appearing youtuberes, namely, [Atul Khatri](https://www.youtube.com/user/gutterguppie), [Flute Raman](https://www.youtube.com/user/fluteraman), [Sadhguru](https://www.youtube.com/user/sadhguru), [Sandeep Maheswari](https://www.youtube.com/user/SandeepSeminars), [Saurabh Pant](https://www.youtube.com/user/PantOnFireComedy). After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
+I have selected a set of 6 diverse-appearing youtubers, namely, [Atul Khatri](https://www.youtube.com/user/gutterguppie), [Flute Raman](https://www.youtube.com/user/fluteraman), [Sadhguru](https://www.youtube.com/user/sadhguru), [Sandeep Maheswari](https://www.youtube.com/user/SandeepSeminars), [Saurabh Pant](https://www.youtube.com/user/PantOnFireComedy). After selecting a number of videos on youtube for each speaker, I have extracted frames out of videos using Opencv. The frames from videos of different speakers were saved in separate directories so as to assign naive class labels to training data.
 Dominant speaker's faces are croppped from images using openCV’s haar cascade classifier. I've used cascade face detector to identify human faces in each of the frame from the video and then crop the identified region. Two types of cropping was applied which is explained in detail in later section.
 
 ## Removing noisy images. 
@@ -38,17 +38,13 @@ Model is trained on the two datasets: super-cropped and moderate-cropped. We did
 
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/results.jpg)
 
-## Gradient Ascent
-Based on our learnt weights, we tried to construct the image which will maximise the probability of getting a particular class given the trained model.
-
 ## Visualizing Test Data
-To visualise the test data, we made use of the tSNE algorithm. For the two sets of test data, we first reduced the
-dimension of the data to 50 by doing a PCA(Principal Component Analysis). After this dimension reduction, we
-further reduced the dimension of the data by using the tSNE algorithm. The results obtained for the two datasets, the one
-given earlier on the one given out just the day before are shown in the Fig4.4.2. we observed clusters corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the
-class of noise were sparser than the other classes. The possible reason for observing different clusters for the same
-speaker, is that since different frames of a particular. speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, there are quite different from each
-other. The class of noise is sparser because very diverse frames have been classified with the same label in this
-class.
+To visualise the test data, I made use of the tSNE algorithm. The Dimensions of test data is first reduced to 50 by doing a PCA(Principal Component Analysis). Then, tSNE is used to reduce it further to 2 dimensions. Clusters can be observed corresponding to each of the seven classes in our data. There were multiple clusters for the same type of speaker in the data. Also, clusters for the class of noise were sparser than the other classes. The possible reason for observing different clusters for the same speaker can be different frames of a particular speaker has been taken from videos that have very different background noise. Therefore, though the images share some commonality, they are quite different from each other. The class of noise is sparser because very diverse frames have been classified with the same label in this class.
 
 ![alt text](https://github.com/harsh-sahu/Dominant-speaker-recognition-in-videos/blob/master/images/test_data_visualization.jpg)
+
+
+## Visualizing the Model
+I, here, make use of a technique called [Grad-CAM](https://arxiv.org/pdf/1610.02391.pdf). It allows to obtain a localization map for any target class, highlighting regions (in the form of heatmap) in input image that positively correlates with the chosen class. For this, I have chosen one image (which are not present in training data) for each class belonging to six speakers.
+
+As you can see, in all the images either face or its near region is highlighted showing that our model is looking at right place to classify images and therefore has learnt well!
